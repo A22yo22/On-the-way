@@ -4,45 +4,35 @@ using UnityEngine;
 
 public class MainScript : MonoBehaviour
 {
+    //references to all Game Scenes
     public GameObject startGameScene;
     public GameObject gameScene;
     public GameObject guessYourNumberSelection;
 
-    public int maxNumber = 10;
+    public Game gameScript;
 
-    public int numberToGuess;
-    public int player1Number;
-    public int yourNumber;
 
+    //Starts the game
     public void StartGame()
     {
-        Debug.Log("StartGame");
         startGameScene.SetActive(false);
-        numberToGuess = Random.Range(1, maxNumber);
-        player1Number = Random.Range(1, maxNumber);
-        GuessYoureNumber();
+        gameScene.SetActive(true);
+
+        StartCoroutine(gameScript.GenerateNumberToGuess());
     }
 
+    //opens the num menue
     public void GuessYoureNumber()
     {
         gameScene.SetActive(false);
         guessYourNumberSelection.SetActive(true);
     }
 
-    void CloseYourNumberGuess()
-    {
-        gameScene.SetActive(true);
-        guessYourNumberSelection.SetActive(false);
-    }
-
-    public void PlayAgain()
-    {
-
-    }
-
+    //Gets the number you pressed in the num menue
     public void GuessNumber(int num)
     {
-        yourNumber = num;
-        CloseYourNumberGuess();
+        gameScript.yourNumber = num;
+        gameScene.SetActive(true);
+        guessYourNumberSelection.SetActive(false);
     }
 }
