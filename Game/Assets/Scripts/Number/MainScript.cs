@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using TMPro;
 
 public class MainScript : MonoBehaviour
 {
@@ -11,6 +13,7 @@ public class MainScript : MonoBehaviour
 
     public Game gameScript;
 
+    public UnityEvent numberPicked;
 
     //Starts the game
     public void StartGame()
@@ -34,5 +37,7 @@ public class MainScript : MonoBehaviour
         gameScript.yourNumber = num;
         gameScene.SetActive(true);
         guessYourNumberSelection.SetActive(false);
+
+        numberPicked.Invoke();
     }
 }
