@@ -11,6 +11,8 @@ public class EndGame : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        spawnWoodScript.scoreText.gameObject.SetActive(false);
+
         endScreen.SetActive(true);
 
         spawnWoodScript.ClearGame();

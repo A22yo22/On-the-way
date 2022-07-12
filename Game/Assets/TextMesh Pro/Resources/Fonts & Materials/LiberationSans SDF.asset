@@ -10,7 +10,7 @@ Material:
   m_Name: LiberationSans SDF Material
   m_Shader: {fileID: 4800000, guid: fe393ace9b354375a9cb14cdbbc28be4, type: 3}
   m_Parent: {fileID: 2100000, guid: a0df09bed440ac84fa0757c26db16d89, type: 2}
-  m_ModifiedSerializedProperties: 2
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 1
@@ -24,14 +24,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs: []
     m_Ints: []
-    m_Floats:
-    - _FaceDilate: 0.159
-    - _OutlineWidth: 0
-    - _ScaleRatioB: 1
-    - _ScaleRatioC: 0.58815
-    - _UnderlayOffsetX: 0
-    - _UnderlayOffsetY: 0
-    - _UnderlaySoftness: 0
+    m_Floats: []
     m_Colors: []
   m_BuildTextureStacks: []
 --- !u!114 &11400000

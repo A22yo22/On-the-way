@@ -7,6 +7,8 @@ public class SpawnWood : MonoBehaviour
     public GameObject wood;
     public GameObject cam;
 
+    public TMPro.TMP_Text scoreText;
+
     public bool woodSpawned = false;
     bool waitingFinished = false;
 
@@ -22,17 +24,33 @@ public class SpawnWood : MonoBehaviour
     public int gameStarted = 0;
 
     public bool gameOver = false;
+    public bool tuchedGround = false;
 
     void Update()
     {
         if (!woodSpawned && !gameOver)
         {
-            waitingFinished = false;
-            woodSpawned = true;
+            if (gameStarted >= 1)
+            {
+                if (tuchedGround)
+                {
+                    tuchedGround = false;
+                    waitingFinished = false;
+                    woodSpawned = true;
 
-            woodListCounterPos++;
+                    woodListCounterPos++;
 
-            StartCoroutine(WaitToSpawnWood());
+                    WaitToSpawnWood();
+                }
+            } 
+            else 
+            {
+                waitingFinished = false;
+                woodSpawned = true;
+
+                woodListCounterPos++; 
+                WaitToSpawnWood(); 
+            }
         }
 
         if(woodSpawned && waitingFinished && !gameOver)
@@ -51,6 +69,9 @@ public class SpawnWood : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) && woodSpawned && waitingFinished && !gameOver)
         {
+            scoresScript.TilePlaced();
+            scoreText.text = scoresScript.current.ToString();
+
             woodSpawned = false;
             gameStarted++;
 
@@ -59,8 +80,6 @@ public class SpawnWood : MonoBehaviour
 
             if(gameStarted == 1)
             {
-                scoresScript.playTimer = true;
-                StartCoroutine(scoresScript.Timer());
                 scoresScript.LoadGame();
             }
 
@@ -70,11 +89,10 @@ public class SpawnWood : MonoBehaviour
         }
     }
 
-    public IEnumerator WaitToSpawnWood()
+    public void WaitToSpawnWood()
     {
-        yield return new WaitForSeconds(0.5f);
-
         woodObject.Add(Instantiate(wood));
+        woodObject[woodListCounterPos].GetComponent<WoodEnter>().spawnWoodScript = this;
 
         Rigidbody2D rb = woodObject[woodListCounterPos].AddComponent<Rigidbody2D>();
         rb.gravityScale = 0;
@@ -97,6 +115,8 @@ public class SpawnWood : MonoBehaviour
         woodListCounterPos = -1;
         gameStarted = 0;
         woodSpawned = false;
+        tuchedGround = false;
+        scoreText.text = "0";
 
         cam.transform.position = new Vector3(0f, 0f, -10f);
         spawnPos = 1;

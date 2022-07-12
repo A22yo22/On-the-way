@@ -18,12 +18,14 @@ public class Money : MonoBehaviour
 
     public void AddMoney(int amount)
     {
-        PlayerPrefs.SetInt("money", loadMoney() + amount);
+        PlayerPrefs.SetInt("money", money + amount);
+        money = loadMoney();
     }
 
     public void DivideMoney(int amount)
     {
-        PlayerPrefs.SetInt("money", loadMoney() - amount);
+        PlayerPrefs.SetInt("money", money - amount);
+        money = loadMoney();
     }
 
     public void ClearMoney()

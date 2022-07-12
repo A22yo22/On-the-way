@@ -6,54 +6,46 @@ using TMPro;
 public class Scores : MonoBehaviour
 {
     public int money;
-    public int currentTime;
-    public int bestTime;
-
-    public bool playTimer = false;
+    public int current;
+    public int best;
 
     //Text
-    public TMP_Text currentTimeText;
-    public TMP_Text bestTimeText;
+    public TMP_Text currentText;
+    public TMP_Text bestText;
     public TMP_Text moneyText;
 
-    public IEnumerator Timer()
-    {
-        yield return new WaitForSeconds(1);
+    public Money moneyManager;
 
-        currentTime++;
-        if (playTimer)
-        {
-            StartCoroutine(Timer());
-        }
+    public void TilePlaced()
+    {
+        current += 1;
     }
 
     public void GameOver()
     {
-        playTimer = false;
-
-        if (currentTime >= bestTime)
+        if (current >= best)
         {
-            bestTime = currentTime;
+            best = current;
         }
 
-        money = currentTime * 10;
+        money = current * 10;
 
         SaveGame();
 
-        currentTimeText.text = currentTime.ToString();
-        bestTimeText.text = bestTime.ToString();
+        currentText.text = current.ToString();
+        bestText.text = best.ToString();
         moneyText.text = money.ToString();
+        moneyManager.AddMoney(money);
+
     }
 
     public void SaveGame()
     {
-        PlayerPrefs.SetInt("money", money);
-        PlayerPrefs.SetInt("bestTime", bestTime);
+        PlayerPrefs.SetInt("best", best);
     }
 
     public void LoadGame()
     {
-        money = PlayerPrefs.GetInt("money");
-        bestTime = PlayerPrefs.GetInt("bestTime");
+        best = PlayerPrefs.GetInt("best");
     }
 }

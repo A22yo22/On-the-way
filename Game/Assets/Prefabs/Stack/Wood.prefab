@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2135966644709351989}
   - component: {fileID: 2135966644709351988}
   - component: {fileID: 2135966644709351987}
+  - component: {fileID: 4563873439334426287}
   m_Layer: 0
   m_Name: Wood
   m_TagString: WoodTile
@@ -75,7 +76,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 0.56846285, b: 0, a: 1}
+  m_Color: {r: 0.46666667, g: 0.46666667, b: 0.46666667, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -109,5 +110,18 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.98, y: 0.98}
+  m_Size: {x: 0.95, y: 0.95}
   m_EdgeRadius: 0
+--- !u!114 &4563873439334426287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2135966644709351991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a17a90c5cfea574ca56000005346097, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnWoodScript: {fileID: 0}
