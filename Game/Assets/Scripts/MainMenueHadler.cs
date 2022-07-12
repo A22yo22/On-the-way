@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class MainMenueHadler : MonoBehaviour
 {
@@ -10,6 +11,10 @@ public class MainMenueHadler : MonoBehaviour
     public GameObject gamesTab;
     public GameObject shopTab;
     public GameObject statsTab;
+
+    //money setup
+    public TMP_Text moneyText;
+    public Money moneyManager;
 
     //opes the main menue and sets all other tabs to unvisable
     public void OpenMainMenue()
@@ -30,6 +35,7 @@ public class MainMenueHadler : MonoBehaviour
     //opens the shop tab
     public void OpenShopTab()
     {
+        moneyText.text = $"Money = {moneyManager.loadMoney()}";
         shopTab.SetActive(true);
         mainMenue.SetActive(false);
     }

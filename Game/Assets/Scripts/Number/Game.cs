@@ -38,6 +38,7 @@ public class Game : MonoBehaviour
     public bool draw = false;
 
     public MainScript mainScript;
+    public Money moneyManager;
 
     public IEnumerator GenerateNumberToGuess()
     {
@@ -88,8 +89,6 @@ public class Game : MonoBehaviour
             youWin = resultYou < resultPlayer1;
         }
 
-        Debug.Log($"You = {resultYou} \n Player1 = {resultPlayer1}");
-        Debug.Log($"You Win = {youWin}");
         if(resultPlayer1 == resultYou) { draw = true; }
 
         RoundOverControll();
@@ -104,6 +103,41 @@ public class Game : MonoBehaviour
         roundOverNumberToGuessText.text = numberToGuess.ToString();
         roundOverYourNumberGuessedText.text = yourNumber.ToString();
         roundOverPlayer1NumberGuessedText.text = player1Number.ToString();
+
+        roundOverMoneyMade.text = CalculateMoneyMade(yourNumber, numberToGuess, youWin, draw).ToString();
+        moneyManager.AddMoney(CalculateMoneyMade(yourNumber, numberToGuess, youWin, draw));
+    }
+
+    public int CalculateMoneyMade(int yourNum, int neededToGuess, bool roundWon, bool drawMode)
+    {
+        if(roundWon && !drawMode)
+        {
+            int resultYou = neededToGuess - yourNum;
+            switch (resultYou)
+            {
+                case 0: return 500;
+
+                case 1: return 450;
+                case -1: return 450;
+
+                case 2: return 400;
+                case -2: return 400;
+
+                case 3: return 300;
+                case -3: return 300;
+
+                case 4: return 200;
+                case -4: return 200;
+
+                case 5: return 150;
+                case -5: return 150;
+
+                case 6: return 100;
+                case -6: return 100;
+
+                default: return 0;
+            }
+        }else { return 0; }
     }
 
     public void PlayAgain()
