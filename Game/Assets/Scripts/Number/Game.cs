@@ -9,8 +9,15 @@ public class Game : MonoBehaviour
     public GameObject guessNumberLoading;
     public GameObject player1GuessingNumber;
 
+    //RoundOver references
+    public GameObject roundOver;
 
-    public GameObject playAgain;
+    public TMP_Text roundOverWonOrLostText;
+    public TMP_Text roundOverNumberToGuessText;
+    public TMP_Text roundOverPlayer1NumberGuessedText;
+    public TMP_Text roundOverYourNumberGuessedText;
+
+    public TMP_Text roundOverMoneyMade;
 
 
     //reference to all Generated Number texts
@@ -26,6 +33,9 @@ public class Game : MonoBehaviour
     public int numberToGuess;
     public int player1Number;
     public int yourNumber;
+
+    public bool youWin = false;
+    public bool draw = false;
 
     public MainScript mainScript;
 
@@ -61,7 +71,7 @@ public class Game : MonoBehaviour
 
         CalculateResult();
 
-        playAgain.SetActive(true);
+        roundOver.SetActive(true);
     }
 
     void CalculateResult()
@@ -69,7 +79,7 @@ public class Game : MonoBehaviour
         int resultPlayer1 = numberToGuess - player1Number;
         int resultYou = numberToGuess - yourNumber;
 
-        bool youWin;
+        
         if ( resultPlayer1 < 0 || resultYou < 0)
         {
             youWin = resultYou > resultPlayer1;
@@ -80,7 +90,20 @@ public class Game : MonoBehaviour
 
         Debug.Log($"You = {resultYou} \n Player1 = {resultPlayer1}");
         Debug.Log($"You Win = {youWin}");
-        if(resultPlayer1 == resultYou) { Debug.Log("draw"); }
+        if(resultPlayer1 == resultYou) { draw = true; }
+
+        RoundOverControll();
+    }
+
+    public void RoundOverControll()
+    {
+        if (draw) { roundOverWonOrLostText.text = "It´s a draw"; } 
+        else if (youWin && !draw) { roundOverWonOrLostText.text = "You won"; } 
+        else if (!youWin && !draw) { roundOverWonOrLostText.text = "You lost"; }
+
+        roundOverNumberToGuessText.text = numberToGuess.ToString();
+        roundOverYourNumberGuessedText.text = yourNumber.ToString();
+        roundOverPlayer1NumberGuessedText.text = player1Number.ToString();
     }
 
     public void PlayAgain()
@@ -89,12 +112,17 @@ public class Game : MonoBehaviour
         player1Number = 0;
         yourNumber = 0;
 
+        youWin = false;
+        draw = false;
+
         guessedNumberText.text = "???";
         player1GuessedNumberText.text = "???";
+        guessedNumberText.gameObject.SetActive(false);
+        player1GuessedNumberText.gameObject.SetActive(false);
         yourNumberText.text = "";
 
         mainScript.startGameScene.SetActive(true);
         mainScript.gameScene.SetActive(false);
-        playAgain.SetActive(false);
+        roundOver.SetActive(false);
     }
 }

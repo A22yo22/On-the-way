@@ -49,4 +49,9 @@ public class MainMenueHadler : MonoBehaviour
     {
         SceneManager.LoadScene("Stack");
     }
+
+    public void OpenNumber()
+    {
+        SceneManager.LoadScene("Number");
+    }
 }

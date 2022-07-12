@@ -35,7 +35,7 @@ public class MainScript : MonoBehaviour
     public void GuessNumber(int num)
     {
         gameScript.yourNumber = num;
-        gameScene.SetActive(true);
+        gameScript.roundOver.SetActive(true);
         guessYourNumberSelection.SetActive(false);
 
         numberPicked.Invoke();
