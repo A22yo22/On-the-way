@@ -6,6 +6,9 @@ using TMPro;
 
 public class MainMenueHadler : MonoBehaviour
 {
+    //reference to Scripts
+    public BuyShit buyShitScript;
+
     //reference to the main menu tabs
     public GameObject mainMenue;
     public GameObject gamesTab;
@@ -36,6 +39,7 @@ public class MainMenueHadler : MonoBehaviour
     public void OpenShopTab()
     {
         moneyText.text = $"Money = {moneyManager.loadMoney()}";
+        buyShitScript.LoadStackShop();
         shopTab.SetActive(true);
         mainMenue.SetActive(false);
     }
