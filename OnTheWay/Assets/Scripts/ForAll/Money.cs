@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Money : MonoBehaviour
 {
-    int money = 0;
+    public int money = 0;
 
     private void Awake()
     {
@@ -31,5 +32,10 @@ public class Money : MonoBehaviour
     public void ClearMoney()
     {
         PlayerPrefs.SetInt("money", 0);
+    }
+
+    public void Refresh(TMP_Text text)
+    {
+        text.text = loadMoney().ToString();
     }
 }

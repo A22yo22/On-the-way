@@ -13,27 +13,36 @@ public class BuyShit : MonoBehaviour
 
     public int itemsBoughtStackLength = 0;
 
-    private void Start()
+    public TMP_Text moneyText;
+
+
+    //reference to scripts
+    public Money moneyScript;
+
+    public void BuyItemStack(int id)
     {
-
-    }
-
-    public void BuyItemStack(int id, Color itemColor)
-    {
-        PlayerPrefs.SetInt($"itemsBoughtStack{itemsBoughtStackLength}", id);
-        itemsBoughtStackLength++;
-
-        for (int i = 0; i < itemSelectedStack.Count; i++)
+        if (moneyScript.loadMoney() >= 100)
         {
-            itemSelectedStack[i].SetActive(false);
+            moneyScript.DivideMoney(100);
+            moneyScript.Refresh(moneyText);
+
+            PlayerPrefs.SetInt($"itemsBoughtStack{itemsBoughtStackLength}", id);
+            itemsBoughtStackLength++;
+
+            for (int i = 0; i < itemSelectedStack.Count; i++)
+            {
+                itemSelectedStack[i].SetActive(false);
+            }
+
+            itemSelectedStack[id].SetActive(true);
+            itemsTextBoughtOrNotStack[id].text = "sold";
+            itemSelectedStack[id].transform.parent.gameObject.GetComponent<Button>().enabled = false;
+
+            stackSelectItem[id].SetActive(true);
+
+            PlayerPrefs.SetInt("itemsBoughtStackLength", itemsBoughtStackLength);
+            PlayerPrefs.SetInt("StackPlayerSkinSelected", id);
         }
-
-        itemSelectedStack[id].SetActive(true);
-        itemsTextBoughtOrNotStack[id].text = "sold";
-        itemSelectedStack[id].transform.parent.gameObject.GetComponent<Button>().enabled = false;
-
-        PlayerPrefs.SetInt("itemsBoughtStackLength", itemsBoughtStackLength);
-        PlayerPrefs.SetInt("StackPlayerSkinSelected", id);
     }
 
     public void LoadStackShop()
@@ -51,6 +60,8 @@ public class BuyShit : MonoBehaviour
 
             itemSelectedStack[itemBoughtStackNumber].transform.parent.gameObject.GetComponent<Button>().enabled = false;
             itemsTextBoughtOrNotStack[itemBoughtStackNumber].text = "sold";
+
+            stackSelectItem[itemBoughtStackNumber].SetActive(true);
         }
     }
 

@@ -831,7 +831,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &74296438
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2632,7 +2632,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4c51c500beeaa14885a1a3ac1f3bda5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buyShitScript: {fileID: 0}
+  buyShitScript: {fileID: 572613974}
   mainMenue: {fileID: 74296437}
   gamesTab: {fileID: 34661057}
   shopTab: {fileID: 1589363049}
@@ -2651,6 +2651,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31377813f120eff4e96dcafd53b1af88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  money: 0
 --- !u!114 &572613974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2685,6 +2686,8 @@ MonoBehaviour:
   - {fileID: 303187905}
   - {fileID: 1236160755}
   itemsBoughtStackLength: 0
+  moneyText: {fileID: 1344673656}
+  moneyScript: {fileID: 572613973}
 --- !u!1 &578211352
 GameObject:
   m_ObjectHideFlags: 0
@@ -3332,7 +3335,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1080, y: 100}
+  m_SizeDelta: {x: 1243.13, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &637988776
 MonoBehaviour:
@@ -3975,7 +3978,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Stack
+  m_text: stack
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a91370c861956fa418c8c414b3427fb1, type: 2}
   m_sharedMaterial: {fileID: -3731942516901134624, guid: a91370c861956fa418c8c414b3427fb1, type: 2}
@@ -6697,7 +6700,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Pong
+  m_text: pong
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a91370c861956fa418c8c414b3427fb1, type: 2}
   m_sharedMaterial: {fileID: -3731942516901134624, guid: a91370c861956fa418c8c414b3427fb1, type: 2}
@@ -9391,7 +9394,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1589363050
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11065,7 +11068,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Number
+  m_text: number
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a91370c861956fa418c8c414b3427fb1, type: 2}
   m_sharedMaterial: {fileID: -3731942516901134624, guid: a91370c861956fa418c8c414b3427fb1, type: 2}
