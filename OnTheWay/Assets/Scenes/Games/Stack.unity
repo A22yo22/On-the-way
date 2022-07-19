@@ -1637,6 +1637,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31377813f120eff4e96dcafd53b1af88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  money: 0
 --- !u!114 &1047781867
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1651,13 +1652,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player1: {fileID: 7211044298370767824}
   Player2: {fileID: 2135966644709351991, guid: 925776c9965cdfe428813768bdef2040, type: 3}
-  playerSkinColors:
-  - {r: 1, g: 0.09411765, b: 0, a: 1}
-  - {r: 0, g: 0.62352943, b: 1, a: 1}
-  - {r: 1, g: 0.8901961, b: 0, a: 1}
-  - {r: 0.74509805, g: 0.30588236, b: 0, a: 1}
-  - {r: 1, g: 0, b: 0.59607846, a: 1}
-  - {r: 1, g: 0.45882353, b: 0, a: 1}
+  stackSkinsObject: {fileID: 11400000, guid: ba2442858a6eb424db47a7a8620144e9, type: 2}
 --- !u!1 &1137497808
 GameObject:
   m_ObjectHideFlags: 0
