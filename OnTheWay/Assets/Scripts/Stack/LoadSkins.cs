@@ -8,14 +8,23 @@ public class LoadSkins : MonoBehaviour
     public GameObject Player1;
     public GameObject Player2;
 
-    List<Color> playerSkinColors;
-
     public StackSkins stackSkinsObject;
 
     void Start()
     {
-        playerSkinColors = stackSkinsObject.playerSkinColors;
-        Player1.GetComponent<SpriteRenderer>().color = playerSkinColors[PlayerPrefs.GetInt("StackPlayerSkinSelected")];
-        Player2.GetComponent<SpriteRenderer>().color = playerSkinColors[PlayerPrefs.GetInt("StackPlayerSkinSelected")];
+        if(stackSkinsObject.coloredSkinSelected)
+        {
+            Player1.GetComponent<SpriteRenderer>().color = stackSkinsObject.playerSkinColors[PlayerPrefs.GetInt("StackPlayerColorSkinSelected")];
+            Player2.GetComponent<SpriteRenderer>().color = stackSkinsObject.playerSkinColors[PlayerPrefs.GetInt("StackPlayerColorSkinSelected")];
+            Player1.transform.localScale = new Vector3(1f, 0.6f, 1f);
+            Player2.transform.localScale = new Vector3(1f, 0.6f, 1f);
+        }
+        else
+        {
+            Player1.GetComponent<SpriteRenderer>().sprite = stackSkinsObject.playerSkinTextures[PlayerPrefs.GetInt("StackPlayerTextureSkinSelected")];
+            Player2.GetComponent<SpriteRenderer>().sprite = stackSkinsObject.playerSkinTextures[PlayerPrefs.GetInt("StackPlayerTextureSkinSelected")];
+            Player1.transform.localScale = new Vector3(0.095f, 0.12f, 1f);
+            Player2.transform.localScale = new Vector3(0.095f, 0.12f, 1f);
+        }
     }
 }

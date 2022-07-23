@@ -6,4 +6,6 @@ public class StackSkins : ScriptableObject
 {
     public List<Color> playerSkinColors;
     public List<Sprite> playerSkinTextures;
+
+    public bool coloredSkinSelected = true;
 }

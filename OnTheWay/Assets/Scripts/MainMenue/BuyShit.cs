@@ -7,19 +7,29 @@ using TMPro;
 public class BuyShit : MonoBehaviour
 {
     // 0 = Red, 1 = Blue, 2 = Yellow, 3 = Broun, 4 = Pink, 5 = Orange
-    public List<TMP_Text> itemsTextBoughtOrNotStack;
-    public List<GameObject> itemSelectedStack;
-    public List<GameObject> stackSelectItem;
+    public List<TMP_Text> itemsColorTextBoughtOrNotStack;
+    public List<TMP_Text> itemsTextureTextBoughtOrNotStack;
+    public List<GameObject> itemSelectedColorStack;
+    public List<GameObject> itemSelectedTextureStack;
+    public List<GameObject> stackSelectItemColor;
+    public List<GameObject> stackSelectItemTexture;
 
     public int itemsBoughtStackLength = 0;
 
     public TMP_Text moneyText;
 
+    //referce to the Shop scriptable objects
+    public StackSkins stackSkinsSOBJ;
 
     //reference to scripts
     public Money moneyScript;
 
-    public void BuyItemStack(int id)
+    private void Start()
+    {
+        moneyScript.AddMoney(10000);
+    }
+
+    public void BuyItemColorStack(int id)
     {
         if (moneyScript.loadMoney() >= 100)
         {
@@ -29,19 +39,55 @@ public class BuyShit : MonoBehaviour
             PlayerPrefs.SetInt($"itemsBoughtStack{itemsBoughtStackLength}", id);
             itemsBoughtStackLength++;
 
-            for (int i = 0; i < itemSelectedStack.Count; i++)
+            for (int i = 0; i < itemSelectedColorStack.Count; i++)
             {
-                itemSelectedStack[i].SetActive(false);
+                itemSelectedColorStack[i].SetActive(false);
+            }
+            for (int i = 0; i < itemSelectedTextureStack.Count; i++)
+            {
+                itemSelectedTextureStack[i].SetActive(false);
             }
 
-            itemSelectedStack[id].SetActive(true);
-            itemsTextBoughtOrNotStack[id].text = "sold";
-            itemSelectedStack[id].transform.parent.gameObject.GetComponent<Button>().enabled = false;
+            itemSelectedColorStack[id].SetActive(true);
+            itemsColorTextBoughtOrNotStack[id].text = "sold";
+            itemSelectedColorStack[id].transform.parent.gameObject.GetComponent<Button>().enabled = false;
 
-            stackSelectItem[id].SetActive(true);
+            stackSelectItemColor[id].SetActive(true);
 
             PlayerPrefs.SetInt("itemsBoughtStackLength", itemsBoughtStackLength);
-            PlayerPrefs.SetInt("StackPlayerSkinSelected", id);
+            PlayerPrefs.SetInt("StackPlayerColorSkinSelected", id);
+            stackSkinsSOBJ.coloredSkinSelected = true;
+        }
+    }
+
+    public void BuyItemTextureStack(int id)
+    {
+        if (moneyScript.loadMoney() >= 1000)
+        {
+            moneyScript.DivideMoney(1000);
+            moneyScript.Refresh(moneyText);
+
+            PlayerPrefs.SetInt($"itemsBoughtStack{itemsBoughtStackLength}", id);
+            itemsBoughtStackLength++;
+
+            for (int i = 0; i < itemSelectedColorStack.Count; i++)
+            {
+                itemSelectedColorStack[i].SetActive(false);
+            }
+            for (int i = 0; i < itemSelectedTextureStack.Count; i++)
+            {
+                itemSelectedTextureStack[i].SetActive(false);
+            }
+
+            itemSelectedTextureStack[id].SetActive(true);
+            itemsTextureTextBoughtOrNotStack[id].text = "sold";
+            itemSelectedTextureStack[id].transform.parent.gameObject.GetComponent<Button>().enabled = false;
+
+            stackSelectItemColor[id].SetActive(true);
+
+            PlayerPrefs.SetInt("itemsBoughtStackLength", itemsBoughtStackLength);
+            PlayerPrefs.SetInt("StackPlayerTextureSkinSelected", id);
+            stackSkinsSOBJ.coloredSkinSelected = false;
         }
     }
 
@@ -51,29 +97,64 @@ public class BuyShit : MonoBehaviour
         {
             int itemBoughtStackNumber = PlayerPrefs.GetInt($"itemsBoughtStack{i}");
 
-            for (int y = 0; y < itemSelectedStack.Count; y++)
+            if (stackSkinsSOBJ.coloredSkinSelected)
             {
-                itemSelectedStack[y].SetActive(false);
+                for (int y = 0; y < itemSelectedColorStack.Count; y++)
+                {
+                    itemSelectedColorStack[y].SetActive(false);
+                }
+                for (int y = 0; y < itemSelectedTextureStack.Count; y++)
+                {
+                    itemSelectedTextureStack[y].SetActive(false);
+                }
+
+                itemSelectedColorStack[PlayerPrefs.GetInt("StackPlayerColorSkinSelected")].SetActive(true);
+
+                itemSelectedColorStack[itemBoughtStackNumber].transform.parent.gameObject.GetComponent<Button>().enabled = false;
+                itemsColorTextBoughtOrNotStack[itemBoughtStackNumber].text = "sold";
+
+                stackSelectItemColor[itemBoughtStackNumber].SetActive(true);
+            } 
+            else
+            {
+                for (int y = 0; y < itemSelectedTextureStack.Count; y++)
+                {
+                    itemSelectedTextureStack[y].SetActive(false);
+                }
+
+                itemSelectedTextureStack[PlayerPrefs.GetInt("StackPlayerTextureSkinSelected")].SetActive(true);
+
+                itemSelectedTextureStack[itemBoughtStackNumber].transform.parent.gameObject.GetComponent<Button>().enabled = false;
+                itemsColorTextBoughtOrNotStack[itemBoughtStackNumber].text = "sold";
+
+                stackSelectItemColor[itemBoughtStackNumber].SetActive(true);
             }
-
-            itemSelectedStack[PlayerPrefs.GetInt("StackPlayerSkinSelected")].SetActive(true);
-
-            itemSelectedStack[itemBoughtStackNumber].transform.parent.gameObject.GetComponent<Button>().enabled = false;
-            itemsTextBoughtOrNotStack[itemBoughtStackNumber].text = "sold";
-
-            stackSelectItem[itemBoughtStackNumber].SetActive(true);
+            
         }
     }
 
     public void SelectItemStack(int id)
     {
-        for (int i = 0; i < itemSelectedStack.Count; i++)
+        if (stackSkinsSOBJ.coloredSkinSelected)
         {
-            itemSelectedStack[i].SetActive(false);
+            for (int i = 0; i < itemSelectedColorStack.Count; i++)
+            {
+                itemSelectedColorStack[i].SetActive(false);
+            }
+
+            itemSelectedColorStack[id].SetActive(true);
+            PlayerPrefs.SetInt("StackPlayerColorSkinSelected", id);
+        }
+        else
+        {
+            for (int i = 0; i < itemSelectedTextureStack.Count; i++)
+            {
+                itemSelectedTextureStack[i].SetActive(false);
+            }
+
+            itemSelectedTextureStack[id].SetActive(true);
+            PlayerPrefs.SetInt("StackPlayerTextureSkinSelected", id);
         }
 
-        itemSelectedStack[id].SetActive(true);
-
-        PlayerPrefs.SetInt("StackPlayerSkinSelected", id);
     }
 }
